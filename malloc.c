@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdlib.h>
 
 /**
  * malloc_error - Function that prints error message.
@@ -66,13 +67,13 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 
 
 /**
- * check_integer - Function that check that string is int.
+ * _checkinteger - Function that check that string is int.
  *
  * @str: string to check it.
  *
  * Return: 0 if not and retuen 1 if all is digits.
  */
-int check_integer(const char *str)
+int _checkinteger(const char *str)
 {
 	if (*str == '-')
 		str++;

@@ -1,15 +1,16 @@
-#ifdef MONTHY_H
+#ifndef MONTHY_H
 #define MONTHY_H
+
+#define _POSIX_C_SOURCE 200809L
 
 /*libaries*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <sys/type.h>
-#include <sys/wait.h>
 #include <fcntl.h>
 #include <ctype.h>
+#include <stddef.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -26,6 +27,7 @@ typedef struct stack_s
         struct stack_s *prev;
         struct stack_s *next;
 } stack_t;
+
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -56,4 +58,5 @@ void _sub(stack_t **stack, unsigned int line_num);
 void _freestack(stack_t **stack);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 int _checkinteger(const char *str); /* check for integer */
+
 #endif /*MONTY_H*/

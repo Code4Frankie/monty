@@ -8,8 +8,8 @@
 
 void _freestack(stack_t **stack)
 {
-	stack_t **node;
-	stack_t **next;
+	stack_t *node;
+	stack_t *next;
 
 	if (stack == NULL || *stack == NULL)
 		return;
@@ -34,7 +34,7 @@ void _freestack(stack_t **stack)
 
 void perform_instructs(char *opcode, unsigned int line_number, stack_t **stack)
 {
-	intstruction_t instructs[} = {
+	instruction_t instructs[] = {
 		{"push", _push},
 		{"pull", _pall},
 		{"pint", _pint},
@@ -42,26 +42,21 @@ void perform_instructs(char *opcode, unsigned int line_number, stack_t **stack)
 		{"swap", _swap},
 		{"add", _add},
 		{"sub", _sub},
-		{"mul", _mul},
-		{"div", _div},
-		{"mod", _mod},
-		{"pchar", _pchar},
 		{NULL, NULL},
 	};
-int i;
-
-if (opcode == NULL || strcmp("nop", opcode) == 0)
-return;
-if (opcode[0] == '#')
-return;
-
-for (i = 0, instructs[i].opcode != NULL; i++)
-{
-	if (strcmp(instructs[i].opcode, opcode) == 0)
-	{
-		instructs[i].f(stack, line_number);
+	int i;
+	if (opcode == NULL || strcmp("nop", opcode) == 0)
 		return;
+	if (opcode[0] == '#')
+		return;
+	for (i = 0; instructs[i].opcode != NULL; i++)
+	{
+		if (strcmp(instructs[i].opcode, opcode) == 0)
+		{
+			instructs[i].f(stack, line_number);
+			return;
+		}
 	}
-	dprintf(2, "L%d: unknow instruction %s\n", line_number, opcode);
-	status == -1;
+		fprintf(stderr, "L%d: unknow instruction %s\n", line_number, opcode);
+		status = -1;
 }

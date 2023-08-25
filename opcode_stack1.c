@@ -10,22 +10,22 @@ void _push(stack_t **stack, unsigned int line_number)
 {
 	char *arg = strtok(NULL, " \t\n");
 
-	stack_t = *new node;
+	stack_t *new_node;
 
-	if (arg == NULL || !check_integer(arg))
+	if (arg == NULL || !_checkinteger(arg))
 	{
-		dprintf(2, "L%d: usage: push integer\n", line_number);
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		status = -1;
 		return;
 	}
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{
-		dprintf(2, "Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		status = -1;
 		return;
 	}
-	new_node->n = atoi(argc);
+	new_node->n = atoi(arg);
 	new_node->prev = NULL;
 	new_node->next = *stack;
 
@@ -42,7 +42,7 @@ void _push(stack_t **stack, unsigned int line_number)
 
 void _pall(stack_t **stack, unsigned int line_number)
 {
-	stack *node;
+	stack_t *node;
 
 	if (stack == NULL || *stack == NULL)
 		return;
@@ -52,7 +52,7 @@ void _pall(stack_t **stack, unsigned int line_number)
 
 	while (node != NULL)
 	{
-		printf("%d/n", node->next);
+		printf("%d\n", node->n);
 		node = node->next;
 	}
 }
@@ -68,7 +68,7 @@ void _pint(stack_t **stack, unsigned int line_number)
 {
 	if (stack == NULL || *stack == NULL)
 	{
-		dprintf(2,  "L%d: can't pint, stack empty\n", line_number);
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		status = -1;
 		return;
 	}
@@ -88,7 +88,7 @@ void _pop(stack_t **stack, unsigned int line_number)
 
 	if (stack == NULL || *stack == NULL)
 	{
-		dprintf(2, "L%d: can't pop an empty stack\n", line_number);
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
 		status = -1;
 		return;
 	}

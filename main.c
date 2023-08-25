@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 {
 	char *opcode;
 	FILE *the_file;
-	size_t size = 0;
+	size_t len_line = 0;
 	unsigned int line_number = 1;
 	stack_t *stack = NULL;
 	char *line = NULL;
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		dprintf(2, "USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -28,11 +28,11 @@ int main(int argc, char **argv)
 
 	if (the_file == NULL)
 	{
-		dprintf(2, "Error: Can't open file %s\n", argv[1]);
-		exit("EXIT_FAILURE");
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
 	}
 
-	while (getline(&line, &size, the_file) != -1)
+	while (getline(&line, &len_line, the_file) != -1)
 	{
 		if (status == -1)
 			break;
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 
 	if (line != NULL)
 		free(line);
-	_free(&stack);
+	_freestack(&stack);
 	fclose(the_file);
 	if (status == -1)
 		exit(EXIT_FAILURE);
