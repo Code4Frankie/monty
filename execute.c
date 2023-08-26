@@ -42,6 +42,10 @@ void perform_instructs(char *opcode, unsigned int line_number, stack_t **stack)
 		{"swap", _swap},
 		{"add", _add},
 		{"sub", _sub},
+		{"div", _div},
+		{"mul", _mul},
+		{"mod", _mod},
+		{"pchar", _pchar},
 		{NULL, NULL},
 	};
 	int i;
